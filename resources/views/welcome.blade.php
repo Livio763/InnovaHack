@@ -39,11 +39,9 @@
                     <a href="{{ url('index.php/login') }}" class="inline-flex items-center justify-center w-full md:w-auto px-7 py-3 rounded-full font-extrabold text-white shadow-lg transform hover:scale-105 transition-all duration-200" style="background: var(--cf-green)">
                         Iniciar sesión
                     </a>
-                        <p class="mt-2 text-xs text-gray-600">Si ya tienes una cuenta, entra aquí.</p>
-                    </div>
-                    <p class="text-center text-xs text-gray-600 mt-4">¿Ya tienes cuenta? <a href="#" onclick="showLoginModal(); return false;" class="font-bold hover:underline" style="color: var(--cf-green)">Inicia sesión</a></p>
                     <p class="mt-2 text-xs text-gray-600">Si ya tienes una cuenta, entra aquí.</p>
                 </div>
+            </div>
             </div>
 
             <!-- Registro -->
@@ -121,7 +119,6 @@
                 </form>
 
                 <p class="text-center text-xs text-gray-600 mt-4">¿Ya tienes cuenta? <a href="{{ url('index.php/login') }}" class="font-bold hover:underline" style="color: var(--cf-green)">Inicia sesión</a></p>
-                    <p class="text-center text-xs text-gray-600 mt-4">¿Ya tienes cuenta? <a href="#" onclick="showLoginModal(); return false;" class="font-bold hover:underline" style="color: var(--cf-green)">Inicia sesión</a></p>
             </div>
         </div>
     </div>
