@@ -8,7 +8,12 @@
 <!-- Hero Section con stats principales -->
 <div class="text-white py-8 px-6" style="background: linear-gradient(135deg, #009639 0%, #007a2e 100%)">
     <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-extrabold mb-2">¡Hola, <span id="userName">Emprendedor</span>!</h1>
+        <h1 class="text-3xl font-extrabold mb-2">
+            ¡Hola, <span id="userName">Emprendedor</span>!
+            <span id="userCourseBadge" class="align-middle ml-3 text-xs md:text-sm font-extrabold px-3 py-1 rounded-full bg-white text-green-700">
+                
+            </span>
+        </h1>
         <p class="text-green-100 text-sm mb-6">Sigue avanzando en tu ruta de aprendizaje</p>
         
         <div class="grid grid-cols-3 gap-4">
@@ -97,11 +102,14 @@
         // Nivel del usuario
         if (user && user.level) {
             const levelMap = {
-                'pre': 'Pre-incubación ',
-                'incubadora': 'Incubadora ',
-                'pending': 'En evaluación '
+                'pre': 'Pre-incubación',
+                'incubadora': 'Incubadora',
+                'pending': 'En evaluación'
             };
-            document.getElementById('userLevel').textContent = levelMap[user.level] || 'Emprendedor';
+            const display = levelMap[user.level] || 'Emprendedor';
+            document.getElementById('userLevel').textContent = display + ' ';
+            const badgeEl = document.getElementById('userCourseBadge');
+            if (badgeEl) badgeEl.textContent = display;
         }
 
         // Stats desde API
