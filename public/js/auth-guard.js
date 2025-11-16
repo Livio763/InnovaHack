@@ -59,7 +59,8 @@ function logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('isLoggedIn');
     const base = (typeof window !== 'undefined' && window.APP_BASE_URL) ? window.APP_BASE_URL : window.location.origin;
-    window.location.href = `${base}/index.php/login`;
+    // Enviar a la bienvenida (registro + acceso) para evitar 404 en /login en algunos servidores
+    window.location.href = `${base}/index.php`;
 }
 
 // Exportar funciones para uso global
