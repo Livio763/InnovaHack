@@ -1,3 +1,13 @@
+
+@push('styles')
+<!-- Estilos del Tutorial de Onboarding -->
+<link rel="stylesheet" href="{{ asset('css/onboarding-tutorial.css') }}">
+@endpush
+
+@push('scripts')
+<!-- Tutorial de Onboarding -->
+<script src="{{ asset('js/onboarding-tutorial.js') }}"></script>
+@endpush
 @extends('layouts.app')
 
 @section('title', 'GIA - Mi Dashboard')
@@ -21,6 +31,11 @@
                 <div class="text-4xl font-extrabold" id="totalPoints">0</div>
                 <div class="text-xs opacity-90 mt-1">Puntos</div>
             </div>
+
+                <!-- Botón flotante para reiniciar el tutorial -->
+                <button onclick="window.restartTutorial()" class="restart-tutorial-btn" title="Reiniciar tutorial">
+                    💡
+                </button>
             <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-4 text-center border border-white border-opacity-30">
                 <div class="text-4xl font-extrabold" id="completedMissions">0</div>
                 <div class="text-xs opacity-90 mt-1">Misiones</div>
@@ -175,6 +190,26 @@
     };
 
     loadDashboard();
+
+    // Iniciar tutorial de onboarding para nuevos usuarios
+    if (typeof OnboardingTutorial !== 'undefined') {
+        window.tutorialInstance = new OnboardingTutorial();
+        // Esperar a que se carguen los datos del dashboard antes de iniciar
+        setTimeout(() => {
+            window.tutorialInstance.start();
+        }, 1000);
+
+        // Función para reiniciar el tutorial manualmente
+        window.restartTutorial = function() {
+            localStorage.removeItem('onboarding_completed');
+            if (window.tutorialInstance) {
+                window.tutorialInstance.start();
+            } else {
+                window.tutorialInstance = new OnboardingTutorial();
+                window.tutorialInstance.start();
+            }
+        };
+    }
 </script>
 @endpush
 @endsection

@@ -1,0 +1,139 @@
+/**
+ * Estilos para el Tutorial de Onboarding
+ */
+
+/* Animaciones de entrada para la mascota */
+@keyframes mascotBounce {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-10px);
+    }
+}
+
+@keyframes mascotWave {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    25% {
+        transform: translate(-50%, -50%) rotate(-5deg);
+    }
+    75% {
+        transform: translate(-50%, -50%) rotate(5deg);
+    }
+}
+
+#tutorial-mascot {
+    animation: mascotBounce 2s ease-in-out infinite;
+}
+
+#tutorial-mascot:hover {
+    animation: mascotWave 0.6s ease-in-out infinite;
+    cursor: pointer;
+}
+
+/* Animación del tooltip */
+@keyframes tooltipSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+#tutorial-tooltip {
+    animation: tooltipSlideIn 0.4s ease-out;
+}
+
+/* Efecto de pulsación en elementos destacados */
+.tutorial-highlight {
+    animation: highlightPulse 2s ease-in-out infinite !important;
+}
+
+@keyframes highlightPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(0, 150, 57, 0.5), 0 0 40px rgba(0, 150, 57, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(0, 150, 57, 0.7), 0 0 60px rgba(0, 150, 57, 0.5);
+    }
+}
+
+/* Hover effects para botones del tutorial */
+#tutorial-tooltip button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 150, 57, 0.4) !important;
+}
+
+#tutorial-tooltip button:active {
+    transform: translateY(0) !important;
+}
+
+/* Overlay fade in */
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#tutorial-overlay {
+    animation: overlayFadeIn 0.3s ease;
+}
+
+/* Botón para reiniciar tutorial (en el dashboard) */
+.restart-tutorial-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #009639 0%, #007a2e 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 150, 57, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.restart-tutorial-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 150, 57, 0.5);
+}
+
+.restart-tutorial-btn:active {
+    transform: scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    #tutorial-mascot {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    #tutorial-tooltip {
+        max-width: 320px !important;
+        padding: 18px !important;
+    }
+
+    .restart-tutorial-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        bottom: 16px;
+        right: 16px;
+    }
+}
