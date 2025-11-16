@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIA - Mis Misiones</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    <!-- Header -->
+    <div class="text-white p-6 rounded-b-3xl shadow-lg" style="background:#009639">
+        <div class="max-w-md mx-auto">
+            <!-- Saludo -->
+            <h1 class="text-2xl font-extrabold mb-2">Bienvenido</h1>
+            <p class="text-green-100 text-sm mb-4" id="routeDisplay">Cargando ruta...</p>
+            
+            <!-- Stats -->
+            <div class="flex gap-3">
+                <div class="flex-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-3 text-center">
+                    <p class="text-3xl font-extrabold" id="totalPoints">0</p>
+                    <p class="text-xs opacity-90">Puntos</p>
+                </div>
+                <div class="flex-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-3 text-center">
+                    <p class="text-3xl font-extrabold" id="totalBadges">0</p>
+                    <p class="text-xs opacity-90">Insignias</p>
+                </div>
+                <div class="flex-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-3 text-center">
+                    <p class="text-3xl font-extrabold" id="completedMissions">0/3</p>
+                    <p class="text-xs opacity-90">Misiones</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="max-w-md mx-auto p-6">
+        <!-- Insignias ganadas -->
+        <div id="badgesSection" class="mb-6 hidden">
+            <h2 class="text-xl font-extrabold text-gray-800 mb-3 flex items-center gap-2">
+                <svg class="w-6 h-6" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3h14l-1 7-6 11-6-11-1-7z"/></svg>
+                <span>Tus Insignias</span>
+            </h2>
+            <div id="badgesList" class="flex gap-2 overflow-x-auto pb-2">
+                <!-- Se llenan con JS -->
+            </div>
+        </div>
+
+        <!-- Misiones -->
+        <h2 class="text-xl font-extrabold text-gray-800 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8"/></svg>
+            <span>Tus Misiones</span>
+        </h2>
+
+        <div class="space-y-4">
+            <!-- Misión 1: Fotografía -->
+            <div class="bg-white rounded-2xl shadow-md p-5 border-2 border-transparent hover:border-green-500 transition-all" id="mission1">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200">
+                        <svg class="w-6 h-6" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h4l2-2h6l2 2h4v12H3z"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-extrabold text-gray-800 mb-1">Misión 1: Saca fotos que vendan</h3>
+                        <p class="text-sm text-gray-600 mb-3">Aprende a tomar fotos profesionales con tu celular</p>
+                        
+                        <!-- Estado -->
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold px-3 py-1 bg-blue-100 text-blue-600 rounded-full" id="mission1Status">
+                                ⏳ Por hacer
+                            </span>
+                            <span class="text-xs text-gray-500">+100 puntos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button 
+                    onclick="window.location.href='mission.html?id=1'" 
+                    class="w-full mt-4 text-white font-bold py-3 px-4 rounded-xl shadow-md transform hover:scale-105 transition-all" id="mission1Button" style="background:#009639">
+                    Empezar misión →
+                </button>
+            </div>
+
+            <!-- Misión 2: Redes Sociales (bloqueada) -->
+            <div class="bg-white rounded-2xl shadow-md p-5 border-2 border-gray-200 opacity-60" id="mission2">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200">
+                        <svg class="w-6 h-6" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-extrabold text-gray-800 mb-1">Misión 2: Crea contenido viral</h3>
+                        <p class="text-sm text-gray-600 mb-3">Aprende a usar TikTok y CapCut para tu negocio</p>
+                        
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold px-3 py-1 bg-gray-200 text-gray-600 rounded-full">
+                                🔒 Bloqueada
+                            </span>
+                            <span class="text-xs text-gray-500">+150 puntos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Misión 3: Pitch (bloqueada) -->
+            <div class="bg-white rounded-2xl shadow-md p-5 border-2 border-gray-200 opacity-60" id="mission3">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 border border-gray-200">
+                        <svg class="w-6 h-6" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m-3 0h6"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-extrabold text-gray-800 mb-1">Misión 3: Tu primer pitch</h3>
+                        <p class="text-sm text-gray-600 mb-3">Graba un video presentando tu negocio</p>
+                        
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold px-3 py-1 bg-gray-200 text-gray-600 rounded-full">
+                                🔒 Bloqueada
+                            </span>
+                            <span class="text-xs text-gray-500">+200 puntos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje motivacional -->
+        <div class="mt-8 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-5 border-2 border-yellow-300">
+            <p class="text-center font-bold text-gray-800">
+                💪 ¡Completa la primera misión para desbloquear las siguientes!
+            </p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Cargar datos del usuario
+        const assignedRoute = localStorage.getItem('assignedRoute') || 'Tu Ruta';
+        document.getElementById('routeDisplay').textContent = assignedRoute;
+
+        // Cargar progreso
+        const points = parseInt(localStorage.getItem('totalPoints') || '0');
+        const badges = JSON.parse(localStorage.getItem('badges') || '[]');
+        const missionsCompleted = JSON.parse(localStorage.getItem('missionsCompleted') || '[]');
+
+        document.getElementById('totalPoints').textContent = points;
+        document.getElementById('totalBadges').textContent = badges.length;
+        document.getElementById('completedMissions').textContent = `${missionsCompleted.length}/3`;
+
+        // Mostrar insignias si hay
+        if (badges.length > 0) {
+            document.getElementById('badgesSection').classList.remove('hidden');
+            const badgesList = document.getElementById('badgesList');
+            badges.forEach(badge => {
+                const badgeEl = document.createElement('div');
+                badgeEl.className = 'bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl p-3 text-center min-w-[80px] shadow-md';
+                badgeEl.innerHTML = `
+                    <div class="text-3xl mb-1">${badge.icon}</div>
+                    <div class="text-xs font-bold text-white">${badge.name}</div>
+                `;
+                badgesList.appendChild(badgeEl);
+            });
+        }
+
+        // Actualizar estado de misión 1
+        if (missionsCompleted.includes('mission1')) {
+            document.getElementById('mission1Status').innerHTML = '✅ Completada';
+            document.getElementById('mission1Status').className = 'text-xs font-bold px-3 py-1 bg-green-100 text-green-600 rounded-full';
+            document.getElementById('mission1Button').textContent = 'Ver de nuevo →';
+            document.getElementById('mission1').classList.add('border-green-400');
+        }
+    </script>
+</body>
+</html>

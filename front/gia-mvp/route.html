@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIA - Tu ruta personalizada</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full animate-fadeInUp border border-gray-100">
+
+        <!-- Título -->
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-4 text-center">
+            ¡Perfecto! Tu ruta es:
+        </h1>
+
+        <!-- Ruta asignada -->
+        <div id="assignedRoute" class="rounded-2xl p-6 mb-6 text-center shadow-lg border-2" style="border-color:#009639">
+            <p class="text-2xl font-extrabold mb-2" id="routeName" style="color:#009639">Cargando...</p>
+            <p class="text-lg text-gray-700" id="routeDescription">Preparando tu experiencia...</p>
+        </div>
+
+        <!-- Características de la ruta -->
+        <div class="bg-blue-50 rounded-2xl p-5 mb-6 space-y-3">
+            <div class="flex items-start gap-3">
+                <span class="text-2xl">📚</span>
+                <div>
+                    <p class="font-bold text-gray-800">Aprenderás con videos cortos</p>
+                    <p class="text-sm text-gray-600">Contenido adaptado a tu nivel</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <span class="text-2xl">✅</span>
+                <div>
+                    <p class="font-bold text-gray-800">Completarás misiones prácticas</p>
+                    <p class="text-sm text-gray-600">Pon en práctica lo aprendido</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <span class="text-2xl">🏆</span>
+                <div>
+                    <p class="font-bold text-gray-800">Ganarás insignias únicas</p>
+                    <p class="text-sm text-gray-600">Demuestra tu progreso</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón continuar -->
+        <button 
+            onclick="window.location.href='dashboard.html'" 
+            class="w-full text-white font-bold text-xl py-5 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center justify-center gap-3"
+            style="background:#009639">
+            <span>Empezar misiones</span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+        </button>
+
+        <p class="text-center text-sm text-gray-500 mt-4">
+            Puedes avanzar a tu ritmo
+        </p>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Asignar ruta según respuestas
+        const stage = localStorage.getItem('stage');
+        const category = localStorage.getItem('category');
+        
+        let routeName = '';
+        let routeDescription = '';
+        
+        if (stage === 'idea') {
+            routeName = 'Ruta Pre-incubadora';
+            routeDescription = 'Convertiremos tu idea en un producto real';
+        } else if (stage === 'active') {
+            if (category === 'food') {
+                routeName = 'Digitaliza tu Sabor';
+                routeDescription = 'Lleva tu negocio de comida al siguiente nivel';
+            } else if (category === 'fashion') {
+                routeName = 'Moda con Impacto';
+                routeDescription = 'Crea una marca de moda memorable';
+            } else {
+                routeName = 'Ruta Incubadora';
+                routeDescription = 'Escala tu negocio con estrategias digitales';
+            }
+        }
+        
+        document.getElementById('routeName').textContent = routeName;
+        document.getElementById('routeDescription').textContent = routeDescription;
+        
+        // Guardar ruta asignada
+        localStorage.setItem('assignedRoute', routeName);
+    </script>
+</body>
+</html>

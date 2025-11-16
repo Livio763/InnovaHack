@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIA - Mis Módulos</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#009639">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cf-green: #009639;
+            --cf-text: #333333;
+        }
+        body { font-family: 'Open Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Modal de bienvenida/notificación (aparece solo la primera vez) -->
+    <div id="welcomeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div id="modalContent" class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center transform transition-all">
+            <!-- El contenido se genera dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="text-white p-6 shadow-lg" style="background: var(--cf-green)">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h1 class="text-2xl font-extrabold">Tu Ruta de Aprendizaje</h1>
+                    <p class="text-green-100 text-sm" id="userName">Cargando...</p>
+                </div>
+                <button onclick="logout()" class="bg-white bg-opacity-20 px-4 py-2 rounded-lg text-sm font-bold hover:bg-opacity-30 transition">
+                    Salir
+                </button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-3 text-center">
+                    <p class="text-2xl font-extrabold" id="totalPoints">0</p>
+                    <p class="text-xs opacity-90">Puntos</p>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-3 text-center">
+                    <p class="text-2xl font-extrabold" id="modulesCompleted">0/4</p>
+                    <p class="text-xs opacity-90">Módulos</p>
+                </div>
+                <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-3 text-center">
+                    <p class="text-2xl font-extrabold" id="totalBadges">0</p>
+                    <p class="text-xs opacity-90">Insignias</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="max-w-4xl mx-auto p-6">
+        <!-- Progreso general -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
+            <div class="flex items-center justify-between mb-2">
+                <h2 class="text-lg font-extrabold text-gray-800">Progreso General</h2>
+                <span class="text-sm font-bold" style="color: var(--cf-green)" id="overallProgress">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div id="progressBar" class="h-3 rounded-full transition-all duration-300" style="width: 0%; background: var(--cf-green)"></div>
+            </div>
+        </div>
+
+        <!-- Módulos -->
+        <div class="space-y-6">
+            <!-- Módulo 1: Ideación y Validación -->
+            <div class="bg-white rounded-2xl shadow-md border-2 border-gray-200 overflow-hidden" id="module1">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #e8f5e9">
+                                <svg class="w-8 h-8" style="color: var(--cf-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-extrabold text-gray-800 mb-1">Módulo 1: Ideación y Validación</h3>
+                                <p class="text-sm text-gray-600 mb-2">Descubre y valida tu idea de negocio</p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="text-xs font-bold px-3 py-1 rounded-full" style="background: #e8f5e9; color: var(--cf-green)" id="module1Status">En progreso</span>
+                                    <span class="text-xs text-gray-500">⏱ MAX 1 semana</span>
+                                    <span class="text-xs font-bold" style="color: var(--cf-green)" id="module1Deadline">Fecha límite: ...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progreso del módulo -->
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-xs font-bold text-gray-600">Progreso</span>
+                            <span class="text-xs font-bold" style="color: var(--cf-green)" id="module1Progress">0/3 misiones</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="module1Bar" class="h-2 rounded-full transition-all" style="width: 0%; background: var(--cf-green)"></div>
+                        </div>
+                    </div>
+
+                    <!-- Misiones del módulo -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer" onclick="goToMission(1, 1)">
+                            <svg class="w-5 h-5 flex-shrink-0" style="color: var(--cf-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <p class="text-sm font-bold text-gray-700 flex-1">Identifica tu idea de negocio</p>
+                            <span class="text-xs px-2 py-1 bg-blue-100 text-blue-600 rounded-full font-bold" id="mission1_1Status">Por hacer</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer opacity-50" id="mission1_2">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            <p class="text-sm font-bold text-gray-500 flex-1">Valida con tu mercado objetivo</p>
+                            <span class="text-xs px-2 py-1 bg-gray-200 text-gray-600 rounded-full font-bold">Bloqueada</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer opacity-50" id="mission1_3">
+                            <svg class="w-5 h-5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            <p class="text-sm font-bold text-gray-500 flex-1">Define tu propuesta de valor</p>
+                            <span class="text-xs px-2 py-1 bg-gray-200 text-gray-600 rounded-full font-bold">Bloqueada</span>
+                        </div>
+                    </div>
+
+                    <!-- Botón de prueba (aparece cuando completa todo) -->
+                    <button id="module1TestBtn" class="hidden w-full mt-4 bg-yellow-500 text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-yellow-600 transition">
+                        Realizar Prueba del Módulo 1 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Módulo 2: Propuesta de Valor -->
+            <div class="bg-white rounded-2xl shadow-md border-2 border-gray-200 opacity-60 overflow-hidden" id="module2">
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 bg-gray-100">
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-extrabold text-gray-800 mb-1">Módulo 2: Diseño de Propuesta de Valor</h3>
+                            <p class="text-sm text-gray-600 mb-2">Construye una propuesta irresistible</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold px-3 py-1 bg-gray-200 text-gray-600 rounded-full">🔒 Bloqueado</span>
+                                <span class="text-xs text-gray-500">⏱ MAX 2 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 italic">Completa el Módulo 1 para desbloquear</p>
+                </div>
+            </div>
+
+            <!-- Módulo 3: Finanzas y Marketing -->
+            <div class="bg-white rounded-2xl shadow-md border-2 border-gray-200 opacity-60 overflow-hidden" id="module3">
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 bg-gray-100">
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-extrabold text-gray-800 mb-1">Módulo 3: Finanzas, Branding y Marketing Digital</h3>
+                            <p class="text-sm text-gray-600 mb-2">Gestiona y promociona tu negocio</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold px-3 py-1 bg-gray-200 text-gray-600 rounded-full">🔒 Bloqueado</span>
+                                <span class="text-xs text-gray-500">⏱ MAX 2 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 italic">Completa el Módulo 2 para desbloquear</p>
+                </div>
+            </div>
+
+            <!-- Módulo 4: MVP -->
+            <div class="bg-white rounded-2xl shadow-md border-2 border-gray-200 opacity-60 overflow-hidden" id="module4">
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 bg-gray-100">
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-extrabold text-gray-800 mb-1">Módulo 4: Prototipo Mínimo Viable (MVP)</h3>
+                            <p class="text-sm text-gray-600 mb-2">Lanza tu primera versión al mercado</p>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold px-3 py-1 bg-gray-200 text-gray-600 rounded-full">🔒 Bloqueado</span>
+                                <span class="text-xs text-gray-500">⏱ MAX 2 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 italic">Completa el Módulo 3 para desbloquear</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Cargar datos del usuario
+        function loadUserData() {
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            const startDate = localStorage.getItem('startDate') || new Date().toISOString();
+            
+            document.getElementById('userName').textContent = userData.fullName || 'Emprendedor';
+            document.getElementById('totalPoints').textContent = localStorage.getItem('points') || '0';
+            document.getElementById('totalBadges').textContent = (localStorage.getItem('badges') || '').split(',').filter(b => b).length;
+            
+            // Calcular fechas límite
+            calculateDeadlines(startDate);
+            
+            // Cargar progreso
+            loadModuleProgress();
+        }
+
+        function calculateDeadlines(startDate) {
+            const start = new Date(startDate);
+            
+            // Módulo 1: +7 días
+            const deadline1 = new Date(start);
+            deadline1.setDate(deadline1.getDate() + 7);
+            document.getElementById('module1Deadline').textContent = `Fecha límite: ${deadline1.toLocaleDateString('es-BO')}`;
+        }
+
+        function loadModuleProgress() {
+            const missionsCompleted = (localStorage.getItem('missionsCompleted') || '').split(',').filter(m => m);
+            const module1Missions = missionsCompleted.filter(m => m.startsWith('1_')).length;
+            
+            document.getElementById('module1Progress').textContent = `${module1Missions}/3 misiones`;
+            document.getElementById('module1Bar').style.width = `${(module1Missions / 3) * 100}%`;
+            
+            const totalModules = 4;
+            const completedModules = 0; // Lógica para calcular módulos completados
+            document.getElementById('modulesCompleted').textContent = `${completedModules}/${totalModules}`;
+            document.getElementById('overallProgress').textContent = `${Math.round((completedModules / totalModules) * 100)}%`;
+            document.getElementById('progressBar').style.width = `${(completedModules / totalModules) * 100}%`;
+        }
+
+        function goToMission(module, mission) {
+            window.location.href = `mission.html?module=${module}&mission=${mission}`;
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                localStorage.clear();
+                window.location.href = 'welcome.html';
+            }
+        }
+
+        // Verificar autenticación
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'welcome.html';
+        }
+
+        // Verificar si el usuario está en pending (esperando evaluación)
+        if (localStorage.getItem('userLevel') === 'pending') {
+            window.location.href = 'evaluation-pending.html';
+        }
+
+        // Mostrar modal de bienvenida si es la primera vez
+        function showWelcomeModal() {
+            const userLevel = localStorage.getItem('userLevel');
+            const notificationShown = localStorage.getItem('levelNotificationShown');
+            
+            if (notificationShown === 'true') {
+                return; // Ya se mostró la notificación
+            }
+
+            const modal = document.getElementById('welcomeModal');
+            const modalContent = document.getElementById('modalContent');
+            let content = '';
+
+            if (userLevel === 'incubadora') {
+                // Usuario aprobado para INCUBADORA
+                content = `
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center animate-bounce">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-gray-800 mb-3">¡Felicitaciones! 🎉</h2>
+                    <p class="text-gray-600 mb-6">Has sido aceptado en el programa de <strong>INCUBADORA</strong>. Estás listo para llevar tu negocio al siguiente nivel y acelerar tu crecimiento.</p>
+                    <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4 mb-6">
+                        <p class="text-sm font-bold text-gray-800 mb-1">Tu programa incluye:</p>
+                        <ul class="text-xs text-left text-gray-700 space-y-1">
+                            <li>✓ Módulos avanzados de escalamiento</li>
+                            <li>✓ Mentoría personalizada</li>
+                            <li>✓ Estrategias de expansión</li>
+                            <li>✓ Red de contactos empresariales</li>
+                        </ul>
+                    </div>
+                    <button onclick="closeWelcomeModal()" class="w-full text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:opacity-90 transition" style="background: var(--cf-green)">
+                        Comenzar mi ruta 🚀
+                    </button>
+                `;
+            } else if (userLevel === 'pre-incubadora') {
+                const businessStatus = localStorage.getItem('businessStatus');
+                
+                if (businessStatus === 'active') {
+                    // Usuario rechazado de INCUBADORA
+                    content = `
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-extrabold text-gray-800 mb-3">¡Iniciemos juntos este camino! 💪</h2>
+                        <p class="text-gray-600 mb-6">Te invitamos a comenzar en <strong>PRE-INCUBADORA</strong>, donde fortalecerás las bases de tu emprendimiento y desarrollarás habilidades clave para el éxito.</p>
+                        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-6">
+                            <p class="text-sm font-bold text-gray-800 mb-2">¿Por qué PRE-INCUBADORA es perfecta para ti?</p>
+                            <ul class="text-xs text-left text-gray-700 space-y-1">
+                                <li>✓ Validarás tu modelo de negocio</li>
+                                <li>✓ Aprenderás marketing digital efectivo</li>
+                                <li>✓ Dominarás finanzas básicas</li>
+                                <li>✓ Construirás bases sólidas para crecer</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4 italic">Al completar PRE-INCUBADORA, podrás postular nuevamente a INCUBADORA con más herramientas.</p>
+                        <button onclick="closeWelcomeModal()" class="w-full text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:opacity-90 transition" style="background: var(--cf-green)">
+                            ¡Vamos a lograrlo juntos! 💚
+                        </button>
+                    `;
+                } else {
+                    // Usuario que eligió PRE directamente (tiene solo una idea)
+                    content = `
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-3xl font-extrabold text-gray-800 mb-3">¡Bienvenido a PRE-INCUBADORA! 🌟</h2>
+                        <p class="text-gray-600 mb-6">Estás a punto de transformar tu idea en un negocio real. Te acompañaremos paso a paso en este emocionante viaje emprendedor.</p>
+                        <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4 mb-6">
+                            <p class="text-sm font-bold text-gray-800 mb-2">Tu ruta de aprendizaje incluye:</p>
+                            <ul class="text-xs text-left text-gray-700 space-y-1">
+                                <li>✓ Validación de tu idea de negocio</li>
+                                <li>✓ Diseño de propuesta de valor</li>
+                                <li>✓ Marketing digital y finanzas</li>
+                                <li>✓ Lanzamiento de tu MVP</li>
+                            </ul>
+                        </div>
+                        <button onclick="closeWelcomeModal()" class="w-full text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:opacity-90 transition" style="background: var(--cf-green)">
+                            Comenzar mi aventura 🚀
+                        </button>
+                    `;
+                }
+            }
+
+            modalContent.innerHTML = content;
+            modal.classList.remove('hidden');
+        }
+
+        function closeWelcomeModal() {
+            localStorage.setItem('levelNotificationShown', 'true');
+            document.getElementById('welcomeModal').classList.add('hidden');
+        }
+
+        // Inicializar
+        showWelcomeModal();
+        loadUserData();
+    </script>
+</body>
+</html>

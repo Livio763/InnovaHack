@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Dashboard de Solicitudes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cf-green: #009639;
+            --cf-text: #333333;
+        }
+        body { font-family: 'Open Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header Admin -->
+    <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 shadow-lg">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-extrabold mb-1">Panel Administrativo</h1>
+                    <p class="text-gray-300 text-sm">ChildFund Bolivia - GIA</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="text-sm font-bold">Administrador</p>
+                        <p class="text-xs text-gray-300">admin@childfund.org.bo</p>
+                    </div>
+                    <button onclick="logoutAdmin()" class="bg-red-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-700 transition">
+                        Salir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="max-w-6xl mx-auto p-6">
+        <!-- Estadísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-3xl font-extrabold text-gray-800" id="totalPending">0</p>
+                        <p class="text-sm text-gray-600">Solicitudes Pendientes</p>
+                    </div>
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-3xl font-extrabold text-gray-800" id="totalApproved">0</p>
+                        <p class="text-sm text-gray-600">Aprobados</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-3xl font-extrabold text-gray-800" id="totalRejected">0</p>
+                        <p class="text-sm text-gray-600">Rechazados</p>
+                    </div>
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-3xl font-extrabold text-gray-800" id="totalUsers">0</p>
+                        <p class="text-sm text-gray-600">Total Usuarios</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-6">
+            <div class="flex border-b border-gray-200">
+                <button onclick="showTab('pending')" id="tabPending" class="flex-1 px-6 py-4 font-bold text-gray-600 hover:bg-gray-50 transition border-b-2 border-yellow-500">
+                    Pendientes
+                </button>
+                <button onclick="showTab('approved')" id="tabApproved" class="flex-1 px-6 py-4 font-bold text-gray-600 hover:bg-gray-50 transition border-b-2 border-transparent">
+                    Aprobados
+                </button>
+                <button onclick="showTab('rejected')" id="tabRejected" class="flex-1 px-6 py-4 font-bold text-gray-600 hover:bg-gray-50 transition border-b-2 border-transparent">
+                    Rechazados
+                </button>
+            </div>
+        </div>
+
+        <!-- Lista de solicitudes -->
+        <div id="applicationsList">
+            <!-- Se llena dinámicamente con JavaScript -->
+        </div>
+
+        <!-- Mensaje vacío -->
+        <div id="emptyMessage" class="hidden text-center py-12">
+            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+            </svg>
+            <p class="text-gray-500 font-semibold">No hay solicitudes en esta categoría</p>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirmModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
+            <h3 class="text-xl font-extrabold text-gray-800 mb-3" id="confirmTitle"></h3>
+            <p class="text-gray-600 mb-6" id="confirmMessage"></p>
+            <div class="flex gap-3">
+                <button onclick="closeConfirmModal()" class="flex-1 bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded-xl hover:bg-gray-300 transition">
+                    Cancelar
+                </button>
+                <button onclick="confirmAction()" id="confirmButton" class="flex-1 font-bold py-3 px-4 rounded-xl text-white transition">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'pending';
+        let currentAction = null;
+        let currentAppId = null;
+
+        // Cargar datos
+        function loadData() {
+            const applications = JSON.parse(localStorage.getItem('pendingApplications') || '[]');
+            
+            // Calcular estadísticas
+            const pending = applications.filter(app => app.status === 'pending').length;
+            const approved = applications.filter(app => app.status === 'approved').length;
+            const rejected = applications.filter(app => app.status === 'rejected').length;
+            
+            document.getElementById('totalPending').textContent = pending;
+            document.getElementById('totalApproved').textContent = approved;
+            document.getElementById('totalRejected').textContent = rejected;
+            document.getElementById('totalUsers').textContent = applications.length;
+
+            renderApplications();
+        }
+
+        // Renderizar solicitudes
+        function renderApplications() {
+            const applications = JSON.parse(localStorage.getItem('pendingApplications') || '[]');
+            const filtered = applications.filter(app => app.status === currentTab);
+            const container = document.getElementById('applicationsList');
+            const emptyMessage = document.getElementById('emptyMessage');
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyMessage.classList.remove('hidden');
+                return;
+            }
+
+            emptyMessage.classList.add('hidden');
+            container.innerHTML = filtered.map(app => `
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-extrabold text-gray-800">${app.name}</h3>
+                                    <p class="text-sm text-gray-500">ID: #${app.id}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Email</p>
+                                    <p class="text-sm font-semibold text-gray-700">${app.email || 'No proporcionado'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Teléfono</p>
+                                    <p class="text-sm font-semibold text-gray-700">${app.phone || 'No proporcionado'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Fecha de solicitud</p>
+                                    <p class="text-sm font-semibold text-gray-700">${new Date(app.appliedAt).toLocaleDateString('es-BO')}</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">Estado</p>
+                                    <span class="text-xs font-bold px-3 py-1 rounded-full ${
+                                        app.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+                                        app.status === 'approved' ? 'bg-green-100 text-green-700' :
+                                        'bg-red-100 text-red-700'
+                                    }">
+                                        ${app.status === 'pending' ? 'Pendiente' : app.status === 'approved' ? 'Aprobado' : 'Rechazado'}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            ${app.status === 'pending' ? `
+                                <div class="flex gap-3">
+                                    <button onclick="approveApplication(${app.id})" class="flex-1 bg-green-500 text-white font-bold py-3 px-4 rounded-xl hover:bg-green-600 transition flex items-center justify-center gap-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                        Aceptar a INCUBADORA
+                                    </button>
+                                    <button onclick="rejectApplication(${app.id})" class="flex-1 bg-red-500 text-white font-bold py-3 px-4 rounded-xl hover:bg-red-600 transition flex items-center justify-center gap-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                        Enviar a PRE-INCUBADORA
+                                    </button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cambiar tab
+        function showTab(tab) {
+            currentTab = tab;
+            
+            // Actualizar estilos de tabs
+            document.querySelectorAll('[id^="tab"]').forEach(btn => {
+                btn.classList.remove('border-yellow-500', 'border-green-500', 'border-red-500', 'text-gray-800');
+                btn.classList.add('border-transparent', 'text-gray-600');
+            });
+            
+            const activeTab = document.getElementById(`tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
+            activeTab.classList.remove('border-transparent', 'text-gray-600');
+            activeTab.classList.add('text-gray-800');
+            
+            if (tab === 'pending') activeTab.classList.add('border-yellow-500');
+            if (tab === 'approved') activeTab.classList.add('border-green-500');
+            if (tab === 'rejected') activeTab.classList.add('border-red-500');
+            
+            renderApplications();
+        }
+
+        // Aprobar solicitud
+        function approveApplication(appId) {
+            currentAppId = appId;
+            currentAction = 'approve';
+            
+            document.getElementById('confirmTitle').textContent = '¿Aceptar en INCUBADORA?';
+            document.getElementById('confirmMessage').textContent = 'El usuario será notificado y tendrá acceso a los módulos avanzados de INCUBADORA.';
+            document.getElementById('confirmButton').style.background = '#10b981';
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        // Rechazar solicitud
+        function rejectApplication(appId) {
+            currentAppId = appId;
+            currentAction = 'reject';
+            
+            document.getElementById('confirmTitle').textContent = '¿Enviar a PRE-INCUBADORA?';
+            document.getElementById('confirmMessage').textContent = 'El usuario será redirigido a PRE-INCUBADORA con un mensaje motivacional.';
+            document.getElementById('confirmButton').style.background = '#ef4444';
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        // Confirmar acción
+        function confirmAction() {
+            const applications = JSON.parse(localStorage.getItem('pendingApplications') || '[]');
+            const appIndex = applications.findIndex(app => app.id === currentAppId);
+            
+            if (appIndex !== -1) {
+                if (currentAction === 'approve') {
+                    applications[appIndex].status = 'approved';
+                    // Actualizar nivel del usuario en su localStorage (simulado para demo)
+                    alert('✅ Usuario aprobado. En producción, esto actualizaría la base de datos y notificaría al usuario.');
+                } else if (currentAction === 'reject') {
+                    applications[appIndex].status = 'rejected';
+                    alert('📨 Usuario redirigido a PRE-INCUBADORA. Se le enviará un mensaje motivacional.');
+                }
+                
+                localStorage.setItem('pendingApplications', JSON.stringify(applications));
+                closeConfirmModal();
+                loadData();
+            }
+        }
+
+        // Cerrar modal
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+            currentAction = null;
+            currentAppId = null;
+        }
+
+        // Logout admin
+        function logoutAdmin() {
+            if (confirm('¿Cerrar sesión de administrador?')) {
+                window.location.href = 'welcome.html';
+            }
+        }
+
+        // Inicializar
+        loadData();
+    </script>
+</body>
+</html>

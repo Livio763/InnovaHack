@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIA - Tu rubro</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-white min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border border-gray-100">
+        <!-- Progreso -->
+        <div class="mb-6">
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                <span class="font-semibold">Pregunta 2 de 2</span>
+                <span>100%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="h-3 rounded-full transition-all duration-500" style="width: 100%; background:#009639"></div>
+            </div>
+        </div>
+
+        <!-- Pregunta -->
+        <h2 class="text-3xl font-extrabold text-gray-800 mb-3 text-center">
+            ¿En qué rubro trabajas?
+        </h2>
+        
+        <p class="text-gray-600 text-center mb-8">
+            Selecciona el que más se acerque
+        </p>
+
+        <!-- Opciones -->
+        <div class="space-y-4">
+            <!-- Opción 1: Comida -->
+            <button 
+                onclick="saveAnswer('category', 'food'); window.location.href='route.html';"
+                class="w-full bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-[#009639] text-gray-800 font-bold text-lg py-6 px-6 rounded-2xl shadow-sm transform hover:scale-105 transition-all duration-200 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <svg class="w-10 h-10" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M5 12h14M6 18h12"/></svg>
+                    <div class="text-left">
+                        <p class="font-extrabold">Comida y bebidas</p>
+                        <p class="text-sm opacity-90">Restaurante, catering, etc.</p>
+                    </div>
+                </div>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <!-- Opción 2: Ropa -->
+            <button 
+                onclick="saveAnswer('category', 'fashion'); window.location.href='route.html';"
+                class="w-full bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-[#009639] text-gray-800 font-bold text-lg py-6 px-6 rounded-2xl shadow-sm transform hover:scale-105 transition-all duration-200 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <svg class="w-10 h-10" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 6l8 6 8-6M4 18h16"/></svg>
+                    <div class="text-left">
+                        <p class="font-extrabold">Ropa y accesorios</p>
+                        <p class="text-sm opacity-90">Moda, joyería, etc.</p>
+                    </div>
+                </div>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <!-- Opción 3: Servicios -->
+            <button 
+                onclick="saveAnswer('category', 'services'); window.location.href='route.html';"
+                class="w-full bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-[#009639] text-gray-800 font-bold text-lg py-6 px-6 rounded-2xl shadow-sm transform hover:scale-105 transition-all duration-200 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <svg class="w-10 h-10" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h2l3 12h8l3-8H6"/></svg>
+                    <div class="text-left">
+                        <p class="font-extrabold">Servicios</p>
+                        <p class="text-sm opacity-90">Reparaciones, consultoría, etc.</p>
+                    </div>
+                </div>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            <!-- Opción 4: Otro -->
+            <button 
+                onclick="saveAnswer('category', 'other'); window.location.href='route.html';"
+                class="w-full bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-[#009639] text-gray-800 font-bold text-lg py-6 px-6 rounded-2xl shadow-sm transform hover:scale-105 transition-all duration-200 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <svg class="w-10 h-10" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"/></svg>
+                    <div class="text-left">
+                        <p class="font-extrabold">Otro rubro</p>
+                        <p class="text-sm opacity-90">Tecnología, arte, etc.</p>
+                    </div>
+                </div>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+
+        <!-- Botón volver -->
+        <button 
+            onclick="window.location.href='quiz-1.html'"
+            class="w-full mt-6 text-gray-600 font-semibold py-3 hover:text-gray-800 transition-colors">
+            ← Volver
+        </button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

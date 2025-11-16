@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIA - ¡Misión Completada!</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        @keyframes confetti {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            animation: confetti 3s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .animate-bounce-custom {
+            animation: bounce 1s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen flex items-center justify-center p-4 overflow-hidden">
+    <!-- Confetti decorativo -->
+    <div class="confetti bg-yellow-400 rounded-full" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="confetti bg-pink-400 rounded-full" style="left: 30%; animation-delay: 0.5s;"></div>
+    <div class="confetti bg-blue-400 rounded-full" style="left: 50%; animation-delay: 1s;"></div>
+    <div class="confetti bg-purple-400 rounded-full" style="left: 70%; animation-delay: 1.5s;"></div>
+    <div class="confetti bg-orange-400 rounded-full" style="left: 90%; animation-delay: 2s;"></div>
+
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full text-center relative z-10 border border-gray-100">
+        <div class="mb-6">
+            <div class="w-32 h-32 rounded-full mx-auto flex items-center justify-center shadow-2xl animate-bounce-custom border-2" style="border-color:#009639">
+                <svg class="w-16 h-16" style="color:#009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+        </div>
+
+        <!-- Título -->
+        <h1 class="text-4xl font-extrabold text-gray-800 mb-3">
+            ¡Increíble trabajo!
+        </h1>
+        
+        <p class="text-lg text-gray-600 mb-6">
+            Completaste tu primera misión con éxito
+        </p>
+
+        <!-- Recompensas -->
+        <div class="bg-gray-50 rounded-2xl p-6 mb-6 border-2 border-gray-200">
+            <h2 class="text-xl font-extrabold text-gray-800 mb-4">🎁 Tus recompensas</h2>
+            
+            <div class="flex justify-center gap-4">
+                <!-- Puntos -->
+                <div class="bg-white rounded-2xl p-4 shadow-lg flex-1">
+                    <div class="text-4xl font-extrabold mb-1" style="color:#009639">+100</div>
+                    <div class="text-sm text-gray-600 font-semibold">Puntos</div>
+                </div>
+                
+                <!-- Insignia -->
+                <div class="bg-white rounded-2xl p-4 shadow-lg flex-1">
+                    <svg class="w-10 h-10 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h4l2-2h6l2 2h4v12H3z"/></svg>
+                    <div class="text-sm text-gray-600 font-semibold">Fotógrafo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats actuales -->
+        <div class="bg-gray-50 rounded-2xl p-5 mb-6">
+            <h3 class="text-lg font-extrabold text-gray-800 mb-3">📊 Tu progreso actual</h3>
+            <div class="flex justify-around">
+                <div>
+                    <p class="text-3xl font-extrabold" id="totalPoints" style="color:#009639">0</p>
+                    <p class="text-xs text-gray-600">Puntos totales</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold" id="totalBadges" style="color:#009639">0</p>
+                    <p class="text-xs text-gray-600">Insignias</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold" id="completedMissions" style="color:#009639">0</p>
+                    <p class="text-xs text-gray-600">Misiones</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje motivacional -->
+        <div class="bg-gray-50 rounded-2xl p-4 mb-6 border-2 border-gray-200">
+            <p class="text-gray-800 font-bold text-lg">
+                ¡Sigue así! Cada misión te acerca más a tu objetivo
+            </p>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="space-y-3">
+            <button 
+                onclick="window.location.href='dashboard.html'" 
+                class="w-full text-white font-bold text-xl py-5 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center justify-center gap-3" style="background:#009639">
+                <span>Ver más misiones</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </button>
+
+            <button 
+                onclick="shareMission()" 
+                class="w-full bg-white hover:bg-gray-50 text-gray-700 font-bold text-lg py-4 px-8 rounded-full shadow-md border-2 border-gray-200 transform hover:scale-105 transition-all duration-200 flex items-center justify-center gap-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12v3a4 4 0 004 4h8a4 4 0 004-4v-3M16 6l-4-4-4 4M12 2v14"/></svg>
+                <span>Compartir logro</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Cargar stats actualizadas
+        const totalPoints = localStorage.getItem('totalPoints') || '0';
+        const badges = JSON.parse(localStorage.getItem('badges') || '[]');
+        const missionsCompleted = JSON.parse(localStorage.getItem('missionsCompleted') || '[]');
+
+        document.getElementById('totalPoints').textContent = totalPoints;
+        document.getElementById('totalBadges').textContent = badges.length;
+        document.getElementById('completedMissions').textContent = missionsCompleted.length;
+
+        function shareMission() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '¡Completé mi primera misión en GIA!',
+                    text: '🎉 Acabo de ganar la insignia 📸 Fotógrafo en GIA. ¡Únete a mí en este viaje emprendedor!',
+                    url: window.location.origin
+                }).catch(err => console.log('Error al compartir:', err));
+            } else {
+                alert('¡Comparte este logro en tus redes sociales! 🎉');
+            }
+        }
+    </script>
+</body>
+</html>

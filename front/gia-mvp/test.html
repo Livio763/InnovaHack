@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIA - Prueba del Módulo</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#009639">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cf-green: #009639;
+            --cf-text: #333333;
+        }
+        body { font-family: 'Open Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <div class="text-white p-6 shadow-lg" style="background: var(--cf-green)">
+        <div class="max-w-2xl mx-auto">
+            <h1 class="text-2xl font-extrabold mb-1">Prueba del Módulo <span id="moduleNumber">1</span></h1>
+            <p class="text-green-100 text-sm" id="moduleTitle">Ideación y Validación</p>
+        </div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="max-w-2xl mx-auto p-6">
+        <!-- Instrucciones -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
+            <h2 class="text-lg font-extrabold text-gray-800 mb-2">Instrucciones</h2>
+            <p class="text-sm text-gray-600 mb-3">Responde las siguientes preguntas para validar tu aprendizaje. Necesitas al menos 70% de respuestas correctas para aprobar.</p>
+            <div class="flex items-center gap-2">
+                <svg class="w-5 h-5" style="color: var(--cf-green)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-sm font-bold text-gray-700">Tiempo estimado: 10 minutos</span>
+            </div>
+        </div>
+
+        <!-- Formulario de prueba -->
+        <form id="testForm" class="space-y-6">
+            <!-- Pregunta 1 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="font-extrabold text-gray-800 mb-3">1. ¿Cuál es el primer paso para validar una idea de negocio?</h3>
+                <div class="space-y-2">
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q1" value="a" class="mt-1" required>
+                        <span class="text-sm text-gray-700">Invertir todo tu dinero en producción</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q1" value="b" class="mt-1">
+                        <span class="text-sm text-gray-700">Hablar con potenciales clientes y entender sus necesidades</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q1" value="c" class="mt-1">
+                        <span class="text-sm text-gray-700">Crear un logotipo profesional</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q1" value="d" class="mt-1">
+                        <span class="text-sm text-gray-700">Rentar un local comercial</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="font-extrabold text-gray-800 mb-3">2. ¿Qué es una propuesta de valor?</h3>
+                <div class="space-y-2">
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q2" value="a" class="mt-1" required>
+                        <span class="text-sm text-gray-700">El precio más bajo del mercado</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q2" value="b" class="mt-1">
+                        <span class="text-sm text-gray-700">Lo que hace único a tu producto y resuelve problemas específicos del cliente</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q2" value="c" class="mt-1">
+                        <span class="text-sm text-gray-700">Una promesa que no necesitas cumplir</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q2" value="d" class="mt-1">
+                        <span class="text-sm text-gray-700">El nombre de tu negocio</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="font-extrabold text-gray-800 mb-3">3. ¿Por qué es importante identificar tu cliente ideal?</h3>
+                <div class="space-y-2">
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q3" value="a" class="mt-1" required>
+                        <span class="text-sm text-gray-700">Para venderle a cualquier persona</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q3" value="b" class="mt-1">
+                        <span class="text-sm text-gray-700">Para enfocar tus recursos y crear mensajes efectivos</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q3" value="c" class="mt-1">
+                        <span class="text-sm text-gray-700">No es importante, todos pueden ser clientes</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q3" value="d" class="mt-1">
+                        <span class="text-sm text-gray-700">Para cobrar precios más altos</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="font-extrabold text-gray-800 mb-3">4. ¿Qué significa MVP (Mínimo Producto Viable)?</h3>
+                <div class="space-y-2">
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q4" value="a" class="mt-1" required>
+                        <span class="text-sm text-gray-700">El producto más caro que puedes hacer</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q4" value="b" class="mt-1">
+                        <span class="text-sm text-gray-700">Una versión básica con funcionalidades esenciales para probar en el mercado</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q4" value="c" class="mt-1">
+                        <span class="text-sm text-gray-700">Un producto de baja calidad</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q4" value="d" class="mt-1">
+                        <span class="text-sm text-gray-700">Solo aplica a empresas de tecnología</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="font-extrabold text-gray-800 mb-3">5. ¿Cuál es la mejor manera de obtener feedback de tus clientes?</h3>
+                <div class="space-y-2">
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q5" value="a" class="mt-1" required>
+                        <span class="text-sm text-gray-700">Asumir lo que quieren sin preguntarles</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q5" value="b" class="mt-1">
+                        <span class="text-sm text-gray-700">Hacer encuestas, entrevistas y observar su comportamiento</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q5" value="c" class="mt-1">
+                        <span class="text-sm text-gray-700">Ignorar sus opiniones negativas</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <input type="radio" name="q5" value="d" class="mt-1">
+                        <span class="text-sm text-gray-700">Solo preguntarle a tu familia</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <button type="submit" class="w-full text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:opacity-90 transition" style="background: var(--cf-green)">
+                Enviar Respuestas
+            </button>
+        </form>
+
+        <!-- Resultado (oculto inicialmente) -->
+        <div id="resultSection" class="hidden mt-6">
+            <div id="resultCard" class="rounded-2xl p-8 shadow-lg text-center">
+                <div id="resultIcon" class="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center"></div>
+                <h2 id="resultTitle" class="text-2xl font-extrabold mb-2"></h2>
+                <p id="resultMessage" class="text-gray-600 mb-4"></p>
+                <div class="bg-gray-100 rounded-xl p-4 mb-6">
+                    <p class="text-3xl font-extrabold mb-1" id="resultScore" style="color: var(--cf-green)">0/5</p>
+                    <p class="text-sm text-gray-600">Respuestas correctas</p>
+                </div>
+                <button onclick="handleResult()" id="resultButton" class="w-full font-bold py-4 px-6 rounded-xl shadow-lg transition"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b',
+            q4: 'b',
+            q5: 'b'
+        };
+
+        let currentModule = 1;
+        let passed = false;
+
+        // Obtener módulo de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        currentModule = parseInt(urlParams.get('module')) || 1;
+
+        const moduleTitles = {
+            1: 'Ideación y Validación',
+            2: 'Diseño de Propuesta de Valor',
+            3: 'Finanzas, Branding y Marketing Digital',
+            4: 'Prototipo Mínimo Viable (MVP)'
+        };
+
+        document.getElementById('moduleNumber').textContent = currentModule;
+        document.getElementById('moduleTitle').textContent = moduleTitles[currentModule];
+
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let score = 0;
+            const formData = new FormData(this);
+            
+            for (let [question, answer] of formData.entries()) {
+                if (correctAnswers[question] === answer) {
+                    score++;
+                }
+            }
+
+            const percentage = (score / 5) * 100;
+            passed = percentage >= 70;
+
+            showResult(score, passed);
+        });
+
+        function showResult(score, passed) {
+            document.getElementById('testForm').classList.add('hidden');
+            document.getElementById('resultSection').classList.remove('hidden');
+
+            const resultCard = document.getElementById('resultCard');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            const resultScore = document.getElementById('resultScore');
+            const resultButton = document.getElementById('resultButton');
+
+            resultScore.textContent = `${score}/5`;
+
+            if (passed) {
+                resultCard.style.background = '#f0fdf4';
+                resultCard.style.borderColor = '#009639';
+                resultCard.classList.add('border-2');
+                
+                resultIcon.style.background = '#009639';
+                resultIcon.innerHTML = '<svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+                
+                resultTitle.textContent = '¡Felicitaciones! 🎉';
+                resultTitle.style.color = '#009639';
+                resultMessage.textContent = `Has aprobado la prueba del Módulo ${currentModule}. Ahora puedes continuar al siguiente módulo.`;
+                
+                resultButton.textContent = 'Continuar al siguiente módulo →';
+                resultButton.style.background = '#009639';
+                resultButton.style.color = 'white';
+
+                // Guardar progreso
+                localStorage.setItem(`module${currentModule}Completed`, 'true');
+                const currentPoints = parseInt(localStorage.getItem('points') || '0');
+                localStorage.setItem('points', currentPoints + 200);
+            } else {
+                resultCard.style.background = '#fef2f2';
+                resultCard.style.borderColor = '#ef4444';
+                resultCard.classList.add('border-2');
+                
+                resultIcon.style.background = '#ef4444';
+                resultIcon.innerHTML = '<svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>';
+                
+                resultTitle.textContent = 'Necesitas mejorar';
+                resultTitle.style.color = '#ef4444';
+                resultMessage.textContent = `Obtuviste ${score}/5 respuestas correctas. Necesitas al menos 4/5 para aprobar. Revisa el contenido del módulo y vuelve a intentarlo.`;
+                
+                resultButton.textContent = 'Volver al módulo';
+                resultButton.style.background = '#ef4444';
+                resultButton.style.color = 'white';
+            }
+        }
+
+        function handleResult() {
+            if (passed) {
+                window.location.href = 'modules.html';
+            } else {
+                window.location.href = `modules.html`;
+            }
+        }
+
+        // Verificar autenticación
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'welcome.html';
+        }
+    </script>
+</body>
+</html>
