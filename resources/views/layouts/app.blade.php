@@ -33,6 +33,17 @@
             background: var(--cf-bg);
             color: var(--cf-text);
         }
+        /* Utilidades naranja */
+        .btn-orange {
+            background: var(--cf-orange);
+            color: #fff;
+            transition: .25s;
+        }
+        .btn-orange:hover { filter: brightness(1.05); box-shadow: 0 4px 14px rgba(255,107,53,0.4); }
+        .accent-orange { color: var(--cf-orange); }
+        .bg-orange-soft { background: #FFF3ED; }
+        .border-orange { border-color: var(--cf-orange); }
+        .progress-gradient-green-orange { background: linear-gradient(90deg, var(--cf-green) 0%, var(--cf-orange) 100%); }
     </style>
     @stack('styles')
 </head>
@@ -55,8 +66,8 @@
             <!-- Header -->
             <div class="p-4 text-white" style="background: linear-gradient(135deg, #009639 0%, #007a2e 100%)">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-white bg-opacity-30 flex items-center justify-center">
-                        <span class="text-2xl">🤖</span>
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-inner">
+                        <img src="{{ asset('assets/images/childfund-logo.jpg') }}" alt="GIA" class="w-8 h-8 object-contain" />
                     </div>
                     <div>
                         <h3 class="font-extrabold text-lg">GIA Assistant</h3>
@@ -71,15 +82,15 @@
             </div>
 
             <!-- Botones r\u00e1pidos -->
-            <div id="giaQuickButtons" class="px-4 py-2 bg-white border-t border-gray-200 flex flex-wrap gap-2">
-                <button onclick="giaQuickQuestion('¿Qu\u00e9 debo hacer ahora?')" class="text-xs px-3 py-1 rounded-full border border-green-600 text-green-700 hover:bg-green-50 transition">
-                    💡 ¿Qu\u00e9 sigue?
-                </button>
+              <div id="giaQuickButtons" class="px-4 py-2 bg-white border-t border-gray-200 flex flex-wrap gap-2">
+                 <button onclick="giaQuickQuestion('¿Qué debo hacer ahora?')" class="text-xs px-3 py-1 rounded-full border border-green-600 text-green-700 hover:bg-green-50 transition">
+                     ¿Qué sigue?
+                 </button>
                 <button onclick="giaQuickQuestion('Resum\u00e9 este m\u00f3dulo')" class="text-xs px-3 py-1 rounded-full border border-green-600 text-green-700 hover:bg-green-50 transition">
-                    📚 Resumen
+                     Resumen
                 </button>
                 <button onclick="giaQuickQuestion('Dame un consejo')" class="text-xs px-3 py-1 rounded-full border border-green-600 text-green-700 hover:bg-green-50 transition">
-                    🚀 Consejo
+                     Consejo
                 </button>
             </div>
 

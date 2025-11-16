@@ -3,27 +3,16 @@
 @section('title', 'GIA - Misión')
 
 @section('content')
-<div class="text-white p-6 rounded-b-3xl shadow-lg" style="background:#009639">
-    <div class="max-w-2xl mx-auto">
-        <button onclick="window.location.href=window.APP_BASE_URL + '/index.php/modules'" class="text-white mb-4 flex items-center gap-2 font-semibold hover:opacity-80">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-            <span>Volver</span>
-        </button>
-        <div class="flex items-center gap-4">
-            <div class="w-16 h-16 bg-white bg-opacity-30 rounded-2xl flex items-center justify-center">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h4l2-2h6l2 2h4v12H3z"/></svg>
-            </div>
-            <div>
-                <h1 id="missionTitle" class="text-2xl font-extrabold">Misión</h1>
-                <p id="missionSubtitle" class="text-orange-100"></p>
-            </div>
-        </div>
-    </div>
-</div>
+<x-header />
 
 <div class="max-w-2xl mx-auto p-6">
+    <button onclick="window.location.href=window.APP_BASE_URL + '/index.php/modules'" class="mb-4 flex items-center gap-2 text-gray-700 font-semibold hover:text-green-600 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span>Volver</span>
+    </button>
     <div class="bg-white rounded-2xl shadow-md p-6 mb-6">
-        <h2 class="text-xl font-extrabold text-gray-800 mb-2">🎯 ¿Qué vas a aprender?</h2>
+        <h2 id="missionTitle" class="text-2xl font-extrabold text-gray-800 mb-3">Misión</h2>
+        <h3 class="text-lg font-bold mb-2" style="color:#009639">¿Qué vas a aprender?</h3>
         <p id="missionDesc" class="text-gray-700"></p>
         <ul class="mt-3 text-sm text-gray-600 list-disc pl-5" id="learnList">
             <li>Finanzas básicas para tu emprendimiento</li>
@@ -33,15 +22,11 @@
     </div>
 
     <div class="bg-gray-50 rounded-2xl p-5 mb-6 border-2 border-gray-200 text-center" id="rewardBox" style="display:none">
-        <p class="font-bold text-gray-800 mb-2">🏆 Recompensa al completar</p>
+        <p class="font-bold text-gray-800 mb-2"> Recompensa al completar</p>
         <div class="flex items-center justify-center gap-4">
             <div class="bg-white rounded-xl px-4 py-2 shadow-md">
                 <p class="text-2xl font-extrabold" style="color:#009639" id="rewardPoints">+0</p>
                 <p class="text-xs text-gray-600">Puntos</p>
-            </div>
-            <div class="bg-white rounded-xl px-4 py-2 shadow-md" id="rewardBadge" style="display:none">
-                <span class="w-7 h-7 mx-auto block text-2xl" id="badgeIcon">🏅</span>
-                <p class="text-xs text-gray-600 font-bold" id="badgeName">Insignia</p>
             </div>
         </div>
     </div>
@@ -60,14 +45,14 @@
             </div>
         </div>
         <button id="markWatched" class="mt-4 w-full text-white font-bold text-lg py-3 px-6 rounded-2xl shadow-md hover:shadow-lg transition" style="background:#009639">Marcar como visto</button>
-        <p class="text-xs text-gray-500 text-center mt-2">Consejo: toma notas rápidas de lo más importante ✍️</p>
+        <p class="text-xs text-gray-500 text-center mt-2">Consejo: toma notas rápidas de lo más importante </p>
     </div>
 
-    <!-- Paso 2: Quiz de repaso -->
-    <div class="bg-white rounded-2xl shadow-md p-6 mt-6" id="quizCard">
+    <!-- Paso 2: Quiz de repaso (bloqueado hasta marcar video) -->
+    <div class="bg-gray-100 rounded-2xl shadow-md p-6 mt-6 opacity-60 pointer-events-none" id="quizCard">
         <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
-            <h3 class="text-lg font-extrabold text-gray-800">Quiz de repaso</h3>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold" style="background: var(--cf-orange)">2</div>
+            <h3 class="text-lg font-extrabold text-gray-500">Quiz de repaso <span class="text-sm accent-orange">(Mira el video primero)</span></h3>
         </div>
         <form id="quizForm" class="space-y-5">
             <div>
@@ -88,10 +73,10 @@
                 <label class="block text-sm"><input type="radio" name="q3" value="b" class="mr-2"/>Reforzar puntos clave con el asistente o prepararte para el quiz</label>
                 <label class="block text-sm"><input type="radio" name="q3" value="c" class="mr-2"/>Esperar sin hacer nada</label>
             </div>
-            <button type="submit" class="w-full text-white font-bold text-lg py-3 px-6 rounded-2xl shadow-md hover:shadow-lg transition" style="background:#009639">Revisar respuestas</button>
+            <button type="submit" class="w-full text-white font-bold text-lg py-3 px-6 rounded-2xl shadow-md hover:shadow-lg transition btn-orange">Revisar respuestas</button>
         </form>
         <p id="quizResult" class="hidden mt-3 text-center font-semibold"></p>
-        <button id="completeButton" class="w-full mt-4 text-white font-bold text-lg py-4 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all hidden" style="background:#009639">✅ Completar misión</button>
+        <button id="completeButton" class="w-full mt-4 text-white font-bold text-lg py-4 px-6 rounded-2xl shadow-lg transform hover:scale-105 transition-all hidden btn-orange">✅ Completar misión</button>
     </div>
 </div>
 
@@ -103,7 +88,7 @@
         throw new Error('No autenticado');
     }
 
-    const missionId = {{ json_encode($missionId ?? null) }};
+    const missionId = {!! json_encode($missionId ?? null) !!};
 
     async function loadMission(){
         const token = localStorage.getItem('auth_token') || localStorage.getItem('authToken');
@@ -112,7 +97,6 @@
         });
         const mi = await res.json();
         document.getElementById('missionTitle').textContent = mi.title || 'Misión';
-        document.getElementById('missionSubtitle').textContent = mi.module ? mi.module.name : '';
         document.getElementById('missionDesc').textContent = mi.description || '';
         // Si es la primera misión o título de bienvenida, adaptamos copy
         try {
@@ -124,40 +108,64 @@
             document.getElementById('rewardBox').style.display = 'block';
             document.getElementById('rewardPoints').textContent = `+${mi.points}`;
         }
-        if (mi.badge_name){
-            document.getElementById('rewardBadge').style.display = 'block';
-            document.getElementById('badgeName').textContent = mi.badge_name;
-            document.getElementById('badgeIcon').textContent = mi.badge_icon || '🏅';
-        }
+        // Se eliminó la insignia visual (solo mostramos puntos)
+
+        // Marcar esta misión como "en progreso" para habilitar el botón Continuar del dashboard
+        try {
+            if (token) {
+                await fetch(`${window.APP_API_BASE}/missions/${missionId}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: 'in_progress' })
+                });
+            }
+        } catch (e) { /* noop */ }
     }
 
     // Mostrar nudge del asistente a la izquierda del botón flotante
     function showAssistantNudge() {
+        console.log('Mostrando nudge del asistente');
         let nudge = document.getElementById('giaNudge');
         if (nudge) nudge.remove();
         nudge = document.createElement('div');
         nudge.id = 'giaNudge';
         nudge.className = 'fixed z-50 bg-white border border-green-200 shadow-xl rounded-xl p-3 max-w-xs';
-        // Posición fija para asegurar visibilidad (cerca del botón del asistente)
         nudge.style.right = '110px';
         nudge.style.bottom = '110px';
-        nudge.innerHTML = `
-            <p class="text-sm text-gray-800 mb-2">¿Quieres reforzar lo aprendido o prepararte conmigo para el quiz?</p>
-            <div class="flex gap-2">
-                <button id="nudgeReforzar" class="text-xs px-3 py-1 rounded-full border border-green-600 text-green-700 hover:bg-green-50">Reforzar</button>
-                <button id="nudgeQuiz" class="text-xs px-3 py-1 rounded-full text-white" style="background:#009639">Prepararme</button>
-            </div>
-        `;
+        
+        const texto = document.createElement('p');
+        texto.className = 'text-sm text-gray-800 mb-2';
+        texto.textContent = '¿Quieres reforzar lo aprendido o prepararte conmigo para el quiz?';
+        
+        const botones = document.createElement('div');
+        botones.className = 'flex gap-2';
+        
+        const btnReforzar = document.createElement('button');
+        btnReforzar.id = 'nudgeReforzar';
+        btnReforzar.className = 'text-xs px-3 py-1 rounded-full border border-green-600 text-green-700 hover:bg-green-50';
+        btnReforzar.textContent = 'Reforzar';
+        
+        const btnQuiz = document.createElement('button');
+        btnQuiz.id = 'nudgeQuiz';
+        btnQuiz.className = 'text-xs px-3 py-1 rounded-full text-white';
+        btnQuiz.style.background = '#009639';
+        btnQuiz.textContent = 'Prepararme';
+        
+        botones.appendChild(btnReforzar);
+        botones.appendChild(btnQuiz);
+        nudge.appendChild(texto);
+        nudge.appendChild(botones);
         document.body.appendChild(nudge);
 
         // Acciones
-        const reforzar = document.getElementById('nudgeReforzar');
-        const prep = document.getElementById('nudgeQuiz');
-        if (reforzar) reforzar.addEventListener('click', () => {
+        btnReforzar.addEventListener('click', () => {
             if (window.giaQuickQuestion) window.giaQuickQuestion('Ayúdame a reforzar los puntos clave del curso de bienvenida.');
             nudge.remove();
         });
-        if (prep) prep.addEventListener('click', () => {
+        btnQuiz.addEventListener('click', () => {
             if (window.giaQuickQuestion) window.giaQuickQuestion('Prepárame con ejemplos para el quiz de la misión de bienvenida.');
             const quiz = document.getElementById('quizCard');
             if (quiz && quiz.scrollIntoView) quiz.scrollIntoView({ behavior: 'smooth' });
@@ -166,17 +174,36 @@
     }
 
     // Simula fin de video
-    document.getElementById('markWatched').addEventListener('click', () => {
+    function handleMarkWatched() {
+        console.log('Botón Marcar como visto clickeado');
         showAssistantNudge();
         const btn = document.getElementById('markWatched');
-        btn.textContent = '¡Visto! ✅';
+        btn.textContent = '¡Visto! ';
         btn.disabled = true;
         btn.classList.add('opacity-80');
-    });
+        
+        // Habilitar quiz
+        const quizCard = document.getElementById('quizCard');
+        quizCard.classList.remove('bg-gray-100', 'opacity-60', 'pointer-events-none');
+        quizCard.classList.add('bg-white');
+        const badge = quizCard.querySelector('.bg-gray-400');
+        if (badge) {
+            badge.classList.remove('bg-gray-400');
+            badge.classList.add('bg-green-500');
+        }
+        const title = quizCard.querySelector('h3');
+        if (title) {
+            title.classList.remove('text-gray-500');
+            title.classList.add('text-gray-800');
+            title.innerHTML = 'Quiz de repaso';
+        }
+        console.log('Quiz habilitado');
+    }
 
     // Quiz
-    document.getElementById('quizForm').addEventListener('submit', (e) => {
+    function handleQuizSubmit(e) {
         e.preventDefault();
+        console.log('Quiz enviado');
         const answers = {
             q1: 'b',
             q2: 'b',
@@ -197,7 +224,7 @@
             result.textContent = `Obtuviste ${score}/3. ¿Quieres reforzarlo conmigo?`;
             result.className = 'mt-3 text-center font-semibold text-orange-700';
         }
-    });
+    }
 
     async function completeMission(){
         const token = localStorage.getItem('auth_token') || localStorage.getItem('authToken');
@@ -219,9 +246,45 @@
         }
     }
 
-    document.getElementById('completeButton').addEventListener('click', completeMission);
+    // Esperar a que el DOM esté listo e inicializar
+    function initializeMission() {
+        console.log('Inicializando misión');
+        const markBtn = document.getElementById('markWatched');
+        const quizForm = document.getElementById('quizForm');
+        const completeBtn = document.getElementById('completeButton');
+        
+        console.log('Botón marcar:', markBtn);
+        console.log('Form quiz:', quizForm);
+        console.log('Botón completar:', completeBtn);
+        
+        if (markBtn) {
+            markBtn.addEventListener('click', handleMarkWatched);
+            console.log('Listener de markWatched registrado');
+        } else {
+            console.error('No se encontró el botón markWatched');
+        }
+        if (quizForm) {
+            quizForm.addEventListener('submit', handleQuizSubmit);
+            console.log('Listener de quiz registrado');
+        } else {
+            console.error('No se encontró el form del quiz');
+        }
+        if (completeBtn) {
+            completeBtn.addEventListener('click', completeMission);
+            console.log('Listener de completar registrado');
+        } else {
+            console.error('No se encontró el botón de completar');
+        }
+        
+        loadMission();
+    }
 
-    loadMission();
+    // Ejecutar cuando el script se cargue (los elementos ya están en el DOM)
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeMission);
+    } else {
+        initializeMission();
+    }
 </script>
 @endpush
 @endsection

@@ -32,11 +32,11 @@
     <!-- Card de progreso general -->
     <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
         <div class="flex items-center justify-between mb-3">
-            <h2 class="text-xl font-extrabold text-gray-800">📊 Tu Progreso General</h2>
+            <h2 class="text-xl font-extrabold text-gray-800"> Tu Progreso General</h2>
             <span class="text-2xl font-extrabold" style="color: #009639" id="progressPercent">0%</span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
-            <div id="progressBar" class="h-4 rounded-full transition-all duration-500" style="width: 0%; background: linear-gradient(90deg, #009639 0%, #00c853 100%)"></div>
+            <div id="progressBar" class="h-4 rounded-full transition-all duration-500 progress-gradient-green-orange" style="width: 0%;"></div>
         </div>
         <div class="flex items-center gap-2">
             <span class="px-3 py-1 rounded-full text-sm font-bold" style="background: #e8f5e9; color: #009639" id="userLevel">Pre-incubación 🌱</span>
@@ -45,7 +45,7 @@
 
     <!-- Card de última actividad -->
     <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100" id="lastActivityCard" style="display: none;">
-        <h2 class="text-xl font-extrabold text-gray-800 mb-4">🎯 Continúa donde lo dejaste</h2>
+        <h2 class="text-xl font-extrabold text-gray-800 mb-4"> Continúa donde lo dejaste</h2>
         <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
             <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: #e8f5e9">
                 <svg class="w-6 h-6" style="color: #009639" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -54,7 +54,7 @@
                 <h3 class="font-bold text-gray-800 mb-1" id="lastModuleName">Cargando...</h3>
                 <p class="text-sm text-gray-600" id="lastMissionTitle">Cargando...</p>
             </div>
-            <button onclick="resumeLastMission()" class="px-4 py-2 rounded-xl font-bold text-white shadow-md hover:shadow-lg transition-all" style="background: #009639">
+            <button onclick="resumeLastMission()" class="px-4 py-2 rounded-xl font-bold text-white shadow-md hover:shadow-lg transition-all btn-orange" style="background: var(--cf-orange)">
                 Reanudar →
             </button>
         </div>
@@ -69,7 +69,7 @@
         </div>
         <h2 class="text-2xl font-extrabold text-gray-800 mb-2">¿Listo para aprender?</h2>
         <p class="text-gray-600 mb-6">Accede a todos tus módulos y misiones</p>
-        <button onclick="window.location.href=window.APP_BASE_URL + '/index.php/modules'" class="px-8 py-4 rounded-full font-extrabold text-lg text-white shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200" style="background: #009639">
+        <button onclick="window.location.href=window.APP_BASE_URL + '/index.php/modules'" class="px-8 py-4 rounded-full font-extrabold text-lg text-white shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200 btn-orange">
             Ir a Mis Módulos →
         </button>
     </div>
@@ -97,9 +97,9 @@
         // Nivel del usuario
         if (user && user.level) {
             const levelMap = {
-                'pre': 'Pre-incubación 🌱',
-                'incubadora': 'Incubadora 🚀',
-                'pending': 'En evaluación ⏳'
+                'pre': 'Pre-incubación ',
+                'incubadora': 'Incubadora ',
+                'pending': 'En evaluación '
             };
             document.getElementById('userLevel').textContent = levelMap[user.level] || 'Emprendedor';
         }
@@ -123,14 +123,20 @@
                 
                 let totalMissions = 0, done = 0;
                 let lastInProgress = null;
+                let nextNotCompleted = null;
 
                 modules.forEach(m => {
-                    (m.missions || []).forEach(mi => {
+                    // Ordenar misiones por su campo order si existe
+                    const missions = [...(m.missions || [])].sort((a,b)=> (a.order||0) - (b.order||0));
+                    missions.forEach(mi => {
                         totalMissions++;
                         const prog = (mi.progress||[]);
                         if (prog.some(p => p.status === 'completed')) done++;
                         else if (prog.some(p => p.status === 'in_progress') && !lastInProgress) {
                             lastInProgress = { module: m, mission: mi };
+                        } else if (!prog.length && !nextNotCompleted) {
+                            // Primera misión sin progreso como fallback de "Continuar"
+                            nextNotCompleted = { module: m, mission: mi };
                         }
                     });
                 });
@@ -140,11 +146,13 @@
                 document.getElementById('progressBar').style.width = pct + '%';
 
                 // Última actividad
-                if (lastInProgress) {
+                // Mostrar continuar con prioridad: en progreso > siguiente sin completar
+                const target = lastInProgress || nextNotCompleted;
+                if (target) {
                     document.getElementById('lastActivityCard').style.display = 'block';
-                    document.getElementById('lastModuleName').textContent = lastInProgress.module.name;
-                    document.getElementById('lastMissionTitle').textContent = lastInProgress.mission.title;
-                    lastMissionId = lastInProgress.mission.id;
+                    document.getElementById('lastModuleName').textContent = target.module.name;
+                    document.getElementById('lastMissionTitle').textContent = target.mission.title;
+                    lastMissionId = target.mission.id;
                 }
             }catch(e){ console.error(e); }
         }

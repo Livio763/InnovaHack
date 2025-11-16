@@ -18,7 +18,7 @@
             <span class="text-sm font-bold" style="color: var(--cf-green)" id="overallProgress">0%</span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-3">
-            <div id="progressBar" class="h-3 rounded-full transition-all duration-300" style="width: 0%; background: var(--cf-green)"></div>
+            <div id="progressBar" class="h-3 rounded-full transition-all duration-300 progress-gradient-green-orange" style="width: 0%;"></div>
         </div>
     </div>
 

@@ -86,10 +86,10 @@ gia-mvp/
 
 ## 🎯 Misiones Disponibles (MVP)
 
-### ✅ Misión 1: Saca fotos que vendan
-- **Contenido:** Tutorial de fotografía de productos
-- **Acción:** Subir foto aplicando lo aprendido
-- **Recompensa:** +100 puntos, insignia 📸 Fotógrafo
+### ✅ Misión 1: Bienvenido a GIA
+- **Contenido:** Introducción al programa y sus pilares
+- **Acción:** Ver video y responder quiz de comprensión
+- **Recompensa:** +100 puntos
 
 ### 🔒 Misión 2: Crea contenido viral (bloqueada)
 - Desbloquea al completar Misión 1
