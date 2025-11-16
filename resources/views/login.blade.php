@@ -51,7 +51,7 @@
                     <input type="checkbox" name="remember" id="remember" class="w-4 h-4">
                     Recordarme
                 </label>
-                <a href="{{ url('index.php/register') }}" class="text-sm font-semibold hover:underline" style="color:#009639">Registrarme</a>
+                <a href="{{ url('index.php/') }}" class="text-sm font-semibold hover:underline" style="color:#009639">Registrarme</a>
             </div>
 
             <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded-lg text-xs"></div>
