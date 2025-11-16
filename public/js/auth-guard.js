@@ -59,8 +59,8 @@ function logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('isLoggedIn');
     const base = (typeof window !== 'undefined' && window.APP_BASE_URL) ? window.APP_BASE_URL : window.location.origin;
-    // Enviar a la bienvenida (registro + acceso) para evitar 404 en /login en algunos servidores
-    window.location.href = `${base}/index.php`;
+    // Ir a la pantalla de registro (raíz /public/) sin index.php
+    window.location.href = `${base}/`;
 }
 
 // Exportar funciones para uso global

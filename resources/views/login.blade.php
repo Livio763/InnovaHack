@@ -47,11 +47,16 @@
             </div>
 
             <div class="flex items-center justify-between">
-                <label class="flex items-center gap-2 text-sm text-gray-700">
-                    <input type="checkbox" name="remember" id="remember" class="w-4 h-4">
-                    Recordarme
-                </label>
-                <a href="#" onclick="window.location.href = (window.APP_BASE_URL || window.location.origin) + '/index.php'; return false;" class="text-sm font-semibold hover:underline" style="color:#009639">Registrarme</a>
+                <div class="flex items-center gap-4">
+                    <label class="flex items-center gap-2 text-sm text-gray-700">
+                        <input type="checkbox" name="remember" id="remember" class="w-4 h-4">
+                        Recordarme
+                    </label>
+                    <button type="button" onclick="window.location.href=(window.APP_BASE_URL||window.location.origin) + '/';" class="text-sm font-semibold px-3 py-1 rounded-full border border-green-600 text-green-700 hover:bg-green-50 transition">
+                        Inicio
+                    </button>
+                </div>
+                <a href="#" onclick="window.location.href = (window.APP_BASE_URL || window.location.origin) + '/'; return false;" class="text-sm font-semibold hover:underline" style="color:#009639">Registrarme</a>
             </div>
 
             <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded-lg text-xs"></div>
